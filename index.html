@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.2.2/web3.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Blockchain Quiz App</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background: linear-gradient(to left, #04286b, #bb1f5d, #e08e0a);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            text-align: center;
+        }
+
+        /* Greeting text styling */
+        h1 {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Button styling */
+        button {
+            background-color: white;
+            color: #433166;
+            font-size: 1em;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Address container styling */
+        #addressContainer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Address display box styling */
+        #address {
+            background: rgb(238, 238, 238);
+            color: #04286b;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgb(243, 224, 255);
+            width: fit-content;
+            font-size: 1.2em;
+            text-align: center;
+            border: 3px solid #ffffff; 
+        }
+
+        /* Next page button styling */
+        #nextPageButton {
+            margin-top: 20px;
+            background-color: white;
+            color: #433166;
+            font-size: 1.5em;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        #nextPageButton:hover {
+            transform: scale(1.1);
+        }
+
+        /* Admin button styling */
+        #adminButton {
+            margin-top: 15px; /* A little space from the MetaMask button */
+        }
+
+        /* Mobile & Tablet Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em; /* Smaller text on mobile */
+                margin-bottom: 15px;
+            }
+
+            button {
+                font-size: 0.9em; /* Smaller buttons */
+                padding: 8px 18px;
+            }
+
+            #address {
+                font-size: 1em; /* Smaller font for address display */
+                padding: 15px;
+            }
+
+            #nextPageButton {
+                font-size: 1.2em; /* Adjust size for mobile screens */
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px; /* Add some padding for mobile */
+            }
+
+            h1 {
+                font-size: 1.5em; /* Further reduce text size for small screens */
+            }
+
+            #address {
+                font-size: 0.9em; /* Adjust address font size */
+                padding: 12px;
+            }
+
+            button {
+                font-size: 0.8em; /* Reduce button size for mobile */
+                padding: 6px 14px;
+            }
+
+            #nextPageButton {
+                font-size: 1.1em; /* Adjust button size */
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="welcomeText">Hello! Welcome to Blockchain Quiz</h1>
+    <button id="connectToMetamask">Login using MetaMask</button>
+    <button id="adminButton" onclick="window.location.href='admin.html'">I am Admin</button>
+    <div id="addressContainer" style="display: none;">
+        <p id="address">Connected address: <span id="ConnectedAddress"></span></p>
+        <button id="nextPageButton" onclick="window.location.href='home_page.html'">→</button>
+    </div>
+
+    <script>
+        const contractAddress = '0x6Bc3ce3D718808Dffa6C3A9dFC17d4f090A1a399';  
+        const contractABI = 
+		[
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
+			}
+		],
+		"name": "ContactMessageReceived",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "ContactMessageRemoved",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "questionText",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string[]",
+				"name": "options",
+				"type": "string[]"
+			}
+		],
+		"name": "QuestionAdded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "QuestionRemoved",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "score",
+				"type": "uint256"
+			}
+		],
+		"name": "QuizAttempted",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_questionText",
+				"type": "string"
+			},
+			{
+				"internalType": "string[]",
+				"name": "_options",
+				"type": "string[]"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_correctAnswer",
+				"type": "uint256"
+			}
+		],
+		"name": "addQuestion",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "admin",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_score",
+				"type": "uint256"
+			}
+		],
+		"name": "attemptQuiz",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "contactMessages",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getContactMessage",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getContactMessageCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getQuestion",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getQuestionCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "getUserScore",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "hasAttemptedQuiz",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "questions",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "questionText",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "correctAnswer",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "removeContactMessage",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "removeQuestion",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_message",
+				"type": "string"
+			}
+		],
+		"name": "submitContactMessage",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "userHasAttempted",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "userScores",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+        
+
+        $("#connectToMetamask").click(async function() {
+            if (window.ethereum) {
+                let addresses = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                window.web3 = new Web3(window.ethereum);
+                const userAddress = addresses[0];
+
+                // contract interaction (you can add your contract code here)
+                const quizContract = new web3.eth.Contract(contractABI, contractAddress);
+
+                $("#connectToMetamask").hide();
+                $("#welcomeText").hide();
+                $("#adminButton").hide(); 
+
+                $("#addressContainer").css('display', 'block');
+                $('#ConnectedAddress').html(userAddress);
+
+                const isAdmin = await quizContract.methods.admin().call();
+                console.log('Is admin:', isAdmin); 
+            } else {
+                alert("Please install MetaMask to continue.");
+            }
+        });
+    </script>
+
+    <script>
+        let inactivityTimeout;
+        const logoutTimeLimit = 5 * 60 * 1000; // 5 minutes timeout period
+
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimeout);
+            inactivityTimeout = setTimeout(logoutUser, logoutTimeLimit);
+        }
+
+        function logoutUser() {
+            alert("You have been logged out due to inactivity.");
+            window.location.reload(); // Reload the page to log out
+        }
+
+        // List of events that count as user activity
+        const events = ['click', 'mousemove', 'keydown', 'scroll'];
+
+        // Listen to user activity to reset the timer
+        events.forEach(event => {
+            document.addEventListener(event, resetInactivityTimer);
+        });
+
+        // Call resetInactivityTimer when MetaMask login is successful
+        $("#connectToMetamask").click(async function() {
+            if (window.ethereum) {
+                let addresses = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                window.web3 = new Web3(window.ethereum);
+                const userAddress = addresses[0];
+
+                $("#connectToMetamask").hide();
+                $("#welcomeText").hide();
+                $("#adminButton").hide();
+                $("#addressContainer").css('display', 'block');
+                $('#ConnectedAddress').html(userAddress);
+
+                resetInactivityTimer();
+            } else {
+                alert("Please install MetaMask to continue.");
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medium Lesson - Advanced Blockchain Concepts</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to left, #04286b, #bb1f5d);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .lesson-content {
+            background-color: white;
+            color: #04286b;
+            padding: 30px;
+            border-radius: 10px;
+            font-size: 20px;
+            margin-top: 30px;
+            line-height: 1.6;
+        }
+
+        .lesson-img {
+            width: 50%;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background: linear-gradient(to left, #04286b, #bb1f5d, #e08e0a);
+        }
+        .navbar .navbar-brand, .navbar .nav-link {
+            color: white; 
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 18px;
+        }
+
+        /* Return Button */
+        .return-btn {
+            background: linear-gradient(to left, #04286b, #bb1f5d);
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 2px solid white;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .return-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Quiz App</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home_page.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About the Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="faq.html">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="learn_with_us.html">Learn with Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lesson 1 -->
+    <div class="container">
+        <h1>Lesson 1: Blockchain Architecture and Components</h1>
+
+        <div class="lesson-content">
+            <p>
+                Blockchain technology is a revolutionary decentralized system that ensures transparency, security, and immutability. The blockchain architecture consists of multiple layers, each playing a crucial role in its functionality.
+            </p>
+            <p>
+                The key components of blockchain include:
+            </p>
+            <ul>
+                <li><strong>Blocks</strong>: A block contains multiple transactions that are verified and added to the chain.</li>
+                <li><strong>Transactions</strong>: These represent changes in the blockchain's state, recording exchanges of assets, data, or smart contract executions.</li>
+                <li><strong>Ledger</strong>: A distributed and decentralized database that stores the entire history of transactions, making it transparent and tamper-proof.</li>
+                <li><strong>Nodes</strong>: Independent computers in the network that validate and maintain the blockchain.</li>
+            </ul>
+        </div>
+
+        <img src="imgs/Slika2.png" alt="Blockchain Architecture" class="lesson-img">
+    </div>
+
+    <!-- Lesson 2 -->
+    <div class="container">
+        <h1>Lesson 2: Consensus Algorithms and Their Importance</h1>
+
+        <div class="lesson-content">
+            <p>
+                In a decentralized network, reaching agreement on the state of the blockchain is crucial. Consensus algorithms are the mechanisms that allow nodes to agree on valid transactions.
+            </p>
+            <p>Here are some of the most common consensus mechanisms:</p>
+            <ul>
+                <li><strong>Proof of Work (PoW)</strong>: Used by Bitcoin, it requires solving complex mathematical puzzles to validate transactions. Highly secure but energy-intensive.</li>
+                <li><strong>Proof of Stake (PoS)</strong>: Validators are chosen based on their stake (number of tokens held). More energy-efficient but can lead to wealth centralization.</li>
+                <li><strong>Delegated Proof of Stake (DPoS)</strong>: Token holders vote for delegates who validate transactions, improving scalability.</li>
+                <li><strong>Practical Byzantine Fault Tolerance (PBFT)</strong>: Ensures consensus even with malicious nodes, commonly used in permissioned blockchains.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Lesson 3 -->
+    <div class="container">
+        <h1>Lesson 3: Smart Contracts and Their Role in Blockchain</h1>
+
+        <div class="lesson-content">
+            <p>
+                A smart contract is a self-executing contract where the agreement terms are written in code. It automates transactions and removes the need for intermediaries.
+            </p>
+            <p>Key features of smart contracts:</p>
+            <ul>
+                <li><strong>Automation</strong>: Transactions are executed automatically when predefined conditions are met.</li>
+                <li><strong>Security</strong>: Running on blockchain ensures transparency and immutability.</li>
+                <li><strong>Efficiency</strong>: Reduces costs and eliminates manual verification.</li>
+            </ul>
+            <p>Smart contracts are used in multiple industries, such as:</p>
+            <ul>
+                <li><strong>Finance</strong>: Automating loan agreements and payments.</li>
+                <li><strong>Real Estate</strong>: Managing property transfers with reduced paperwork.</li>
+                <li><strong>Supply Chain</strong>: Ensuring transparent tracking of goods.</li>
+            </ul>
+            <p>
+                However, smart contracts are not without risks. Bugs in the contract code can lead to security vulnerabilities. Auditing and testing smart contracts before deployment is crucial to prevent potential losses.
+            </p>
+        </div>
+    </div>
+
+    <!-- Return Button -->
+    <div class="container">
+        <button class="return-btn" onclick="location.href='http://127.0.0.1:5500/learn_with_us.html'">Return</button>
+    </div>
+
+</body>
+</html>

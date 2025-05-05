@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Admin!</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+	
+    <style>
+        
+
+        /* Back Button Styling */
+        .back-button {
+            display: inline-block;
+            padding: 5px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            background-color: #04286b;
+            border-radius: 5px;
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #031c4d;
+        }
+
+        form {
+            margin: 0 auto;
+            display: inline-block;
+            text-align: left;
+            background: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #bb1f5d;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #bb1f5d;
+        }
+
+        .question-list {
+            margin-top: 30px;
+            background: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #fdfbfb;
+            border-radius: 5px;
+        }
+
+        .remove-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+
+        .contact-message-list {
+            margin-top: 30px;
+        }
+
+        .contact-message-item {
+            padding: 10px;
+            background: rgb(255, 255, 255);
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: white; /* White text for headings */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Back Button -->
+        <a href="index.html" class="back-button">Back</a>
+
+    </div>
+
+</body>
+</html>
+
+	
+	<style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            padding-top: 30px;
+            background: linear-gradient(to left, #04286b, #bb1f5d, #e08e0a);
+        }
+		
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        form {
+            margin: 0 auto;
+            display: inline-block;
+            text-align: left;
+            background: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #bb1f5d;
+            color: white;
+        }
+        button:hover {
+            background-color: #bb1f5d;
+        }
+        .question-list {
+            margin-top: 30px;
+            background: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .question-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #fdfbfb;
+            border-radius: 5px;
+        }
+        .remove-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            display: inline-block;
+        }
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+        .contact-message-list {
+            margin-top: 30px;
+        }
+        .contact-message-item {
+            padding: 10px;
+            background: rgb(255, 255, 255);
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+		h1 {
+            color: white; /* This will make all h3 text white */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome, Admin!</h1>
+        <form id="questionForm">
+            <label for="questionText">Question Text:</label>
+            <input type="text" id="questionText" required><br><br>
+
+            <label for="option1">Option 1:</label>
+            <input type="text" id="option1" required><br><br>
+
+            <label for="option2">Option 2:</label>
+            <input type="text" id="option2" required><br><br>
+
+            <label for="option3">Option 3:</label>
+            <input type="text" id="option3" required><br><br>
+
+            <label for="option4">Option 4:</label>
+            <input type="text" id="option4" required><br><br>
+
+            <label for="correctAnswer">Correct Answer (1-4):</label>
+            <input type="number" id="correctAnswer" min="1" max="4" required><br><br>
+
+            <button type="submit">Add Question</button>
+        </form>
+
+        <!-- Display List of Questions -->
+        <div class="question-list">
+            <h3>Existing Questions</h3>
+            <div id="questionItems"></div>
+        </div>
+
+        <div class="contact-message-list">
+            <h3>Contact Messages</h3>
+            <div id="contactMessageItems"></div>
+        </div>
+    </div>
+
+    <script>
+        if (typeof window.ethereum === 'undefined') {
+            alert("MetaMask is not installed. Please install MetaMask to interact with the app.");
+        } else {
+            const web3 = new Web3(window.ethereum);
+            const contractAddress = "0x6Bc3ce3D718808Dffa6C3A9dFC17d4f090A1a399"; 
+            const abi = [
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
+			}
+		],
+		"name": "ContactMessageReceived",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "ContactMessageRemoved",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "questionText",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string[]",
+				"name": "options",
+				"type": "string[]"
+			}
+		],
+		"name": "QuestionAdded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "QuestionRemoved",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "score",
+				"type": "uint256"
+			}
+		],
+		"name": "QuizAttempted",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_questionText",
+				"type": "string"
+			},
+			{
+				"internalType": "string[]",
+				"name": "_options",
+				"type": "string[]"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_correctAnswer",
+				"type": "uint256"
+			}
+		],
+		"name": "addQuestion",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "admin",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_score",
+				"type": "uint256"
+			}
+		],
+		"name": "attemptQuiz",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "contactMessages",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getContactMessage",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getContactMessageCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getQuestion",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getQuestionCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "getUserScore",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "hasAttemptedQuiz",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "questions",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "questionText",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "correctAnswer",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "removeContactMessage",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "removeQuestion",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_message",
+				"type": "string"
+			}
+		],
+		"name": "submitContactMessage",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "userHasAttempted",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "userScores",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+            const contract = new web3.eth.Contract(abi, contractAddress);
+
+            async function fetchQuestions() {
+                const questionItemsDiv = document.getElementById('questionItems');
+                questionItemsDiv.innerHTML = ''; 
+
+                try {
+                    const questionCount = await contract.methods.getQuestionCount().call();
+
+                    for (let i = 0; i < questionCount; i++) {
+                        const questionData = await contract.methods.getQuestion(i).call();
+                        const questionText = questionData[0];
+
+                        const questionItemDiv = document.createElement('div');
+                        questionItemDiv.className = 'question-item';
+                        questionItemDiv.innerHTML = `<strong>${questionText}</strong>`;
+
+                        const removeButton = document.createElement('button');
+                        removeButton.textContent = 'Remove';
+                        removeButton.className = 'remove-btn';
+                        removeButton.onclick = async () => {
+                            try {
+                                const accounts = await web3.eth.requestAccounts();
+                                const userAccount = accounts[0];
+                                  
+                                await contract.methods.removeQuestion(i).send({ from: userAccount });
+                                alert('Question removed successfully!');
+                                fetchQuestions(); // Refresh the question list
+                            } catch (error) {
+                                console.error("Error removing question:", error);
+                                alert("Failed to remove question.");
+                            }
+                        };
+
+                        questionItemDiv.appendChild(removeButton);
+                        questionItemsDiv.appendChild(questionItemDiv);
+                    }
+                } catch (error) {
+                    console.error("Error fetching questions:", error);
+                }
+            }
+
+            async function fetchContactMessages() {
+                const contactMessageItemsDiv = document.getElementById('contactMessageItems');
+                contactMessageItemsDiv.innerHTML = ''; 
+
+                try {
+                    const contactMessageCount = await contract.methods.getContactMessageCount().call();
+
+                    for (let i = 0; i < contactMessageCount; i++) {
+                        const contactMessageData = await contract.methods.getContactMessage(i).call();
+                        const { name, email, message } = contactMessageData;
+
+                        const contactMessageItemDiv = document.createElement('div');
+                        contactMessageItemDiv.className = 'contact-message-item';
+                        contactMessageItemDiv.innerHTML = `<strong>${name}</strong><br><em>${email}</em><p>${message}</p>`;
+
+                        // Add Remove Button for each message
+                        const removeButton = document.createElement('button');
+                        removeButton.textContent = 'Remove';
+                        removeButton.className = 'remove-btn';
+                        removeButton.onclick = async () => {
+                            try {
+                                const accounts = await web3.eth.requestAccounts();
+                                const userAccount = accounts[0];
+                                  
+                                await contract.methods.removeContactMessage(i).send({ from: userAccount });
+                                alert('Contact message removed successfully!');
+                                fetchContactMessages(); // Refresh the contact message list
+                            } catch (error) {
+                                console.error("Error removing contact message:", error);
+                                alert("Failed to remove contact message.");
+                            }
+                        };
+
+                        contactMessageItemDiv.appendChild(removeButton);
+                        contactMessageItemsDiv.appendChild(contactMessageItemDiv);
+                    }
+                } catch (error) {
+                    console.error("Error fetching contact messages:", error);
+                }
+            }
+
+            fetchQuestions();
+            fetchContactMessages();
+
+            document.getElementById('questionForm').addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const questionText = document.getElementById('questionText').value;
+                const option1 = document.getElementById('option1').value;
+                const option2 = document.getElementById('option2').value;
+                const option3 = document.getElementById('option3').value;
+                const option4 = document.getElementById('option4').value;
+                const correctAnswer = parseInt(document.getElementById('correctAnswer').value);
+
+                if (!questionText || !option1 || !option2 || !option3 || !option4 || isNaN(correctAnswer) || correctAnswer < 1 || correctAnswer > 4) {
+                    alert("Please fill in all fields correctly.");
+                    return;
+                }
+
+                try {
+                    const accounts = await web3.eth.requestAccounts();
+                    const userAccount = accounts[0];
+
+                    await contract.methods.addQuestion(questionText, [option1, option2, option3, option4], correctAnswer).send({ from: userAccount });
+                    alert('Question added successfully!');
+                    fetchQuestions(); // Refresh the question list
+                } catch (error) {
+                    console.error("Error adding question:", error);
+                    alert("Failed to add question.");
+                }
+            });
+        }
+    </script>
+
+
+
+
+</body>
+</html>
