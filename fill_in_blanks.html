@@ -109,25 +109,9 @@
         }
 
         /* Statistics Section */
-        #statistics {
-            display: none;
-            background: linear-gradient(to left, #04286b, #bb1f5d, #e08e0a);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            color: white;
-        }
+        /*TO BE IMPLEMENTED*/
 
-        #statistics h4 {
-            margin-bottom: 15px;
-            font-size: 24px;
-        }
-
-        #statistics p {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
+       
 
         /* Media Queries for Responsiveness */
         @media (max-width: 768px) {
@@ -228,15 +212,10 @@
         </ul>
 
         <!-- Show Statistics Button -->
-        <button class="btn-finish" onclick="toggleStatistics()">Show Statistics</button>
+       <!--TO BE IMEPLEMENTED-->
 
         <!-- Statistics Section -->
-        <div id="statistics">
-            <h4>Statistics for the Last 3 Days</h4>
-            <p id="totalAnswered">Total Questions Answered: 0</p>
-            <p id="totalCorrect">Total Correct Answers: 0</p>
-            <p id="totalWrong">Total Incorrect Answers: 0</p>
-        </div>
+        <!--TO BE IMEPLEMENTED-->
     </div>
 
     <!-- Quiz Form -->
@@ -332,16 +311,10 @@
             });
 
             // Update statistics
-            stats.totalAnswered += questions.length;
-            stats.totalCorrect += correctAnswers;
-            stats.totalWrong += incorrectAnswers;
-
-            localStorage.setItem('quizStats', JSON.stringify(stats));
+            //TO BE IMPLEMENTED !!!
 
             // Update statistics on sidebar
-            document.getElementById('totalAnswered').textContent = `Total Questions Answered: ${stats.totalAnswered}`;
-            document.getElementById('totalCorrect').textContent = `Total Correct Answers: ${stats.totalCorrect}`;
-            document.getElementById('totalWrong').textContent = `Total Incorrect Answers: ${stats.totalWrong}`;
+            //TO BE IMPLEMENTED !!!
 
             // Clear fields after 3 seconds
             setTimeout(() => {
@@ -353,10 +326,7 @@
         }
 
         // Toggle Statistics visibility
-        function toggleStatistics() {
-            let statsSection = document.getElementById('statistics');
-            statsSection.style.display = statsSection.style.display === 'none' ? 'block' : 'none';
-        }
+        //TO BE IMPLEMENTED !!!
     </script>
 
 </body>
