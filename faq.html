@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* Navbar Styles */
         .navbar {
             background: linear-gradient(to left, #04286b, #bb1f5d, #e08e0a)
         }
@@ -22,7 +21,6 @@
             font-size: 18px;
         }
 
-        /* Keep navbar links white on all states */
         .navbar .nav-link:link,
         .navbar .nav-link:visited,
         .navbar .nav-link:hover,
@@ -31,12 +29,10 @@
             text-decoration: none;
         }
 
-        /* Align Navbar to the Left */
         .navbar-nav {
             margin-left: 0;
         }
 
-        /* Body Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -95,8 +91,6 @@
         .faq-item.open {
             background-color: #bb1f5d;
         }
-
-       
     </style>
 </head>
 <body>
@@ -111,23 +105,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="home_page.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About the Quiz</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="faq.html">FAQ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
-                        <li class="nav-item">
-							<a class="nav-link" href="fill_in_blanks.html">Fill In The Blanks </a>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="learn_with_us.html">Learn with Us</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="home_page.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About the Quiz</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="faq.html">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="fill_in_blanks.html">Fill In The Blanks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="learn_with_us.html">Learn with Us</a></li>
                 </ul>
             </div>
         </div>
@@ -137,45 +120,52 @@
     <div class="container">
         <h1>Frequently Asked Questions</h1>
 
-        <div class="faq-item" onclick="toggleAnswer(this)">
+        <div class="faq-item">
             <p class="question">What is this Quiz App about?</p>
             <p class="answer">This app allows users to test their knowledge about blockchain through interactive quizzes.</p>
         </div>
 
-        <div class="faq-item" onclick="toggleAnswer(this)">
+        <div class="faq-item">
             <p class="question">How do I participate in a quiz?</p>
             <p class="answer">Navigate to the Home page, select a quiz, and start answering questions.</p>
         </div>
 
-        <div class="faq-item" onclick="toggleAnswer(this)">
+        <div class="faq-item">
             <p class="question">Do I need to sign up?</p>
             <p class="answer">The connection with MetaMask is required to enter the quiz.</p>
-
-    
         </div>
 
-        <div>
-            <div class="faq-item" onclick="toggleAnswer(this)">
-                <p class="question">How many questions does the quiz has?</p>
-                <p class="answer">Currently quiz has the total of 10 questions.</p>
+        <div class="faq-item">
+            <p class="question">How many questions does the quiz has?</p>
+            <p class="answer">Currently quiz has the total of 10 questions.</p>
         </div>
 
-        <div>
-            <div class="faq-item" onclick="toggleAnswer(this)">
-                <p class="question">Will the quiz have more questions?</p>
-                <p class="answer">Yes, the quiz will have more questions, around 50.</p>
+        <div class="faq-item">
+            <p class="question">Will the quiz have more questions?</p>
+            <p class="answer">Yes, the quiz will have more questions, around 50.</p>
         </div>
     </div>
-
-    
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Module Pattern -->
     <script>
-        function toggleAnswer(element) {
-            element.classList.toggle("open");
-        }
+        const FAQModule = (function () {
+            function init() {
+                const faqItems = document.querySelectorAll('.faq-item');
+                faqItems.forEach(item => {
+                    item.addEventListener('click', function () {
+                        this.classList.toggle('open');
+                    });
+                });
+            }
+
+            return {
+                init: init
+            };
+        })();
+
+       
+        document.addEventListener("DOMContentLoaded", FAQModule.init); // inicijaliziramo modul 
     </script>
 
 </body>
