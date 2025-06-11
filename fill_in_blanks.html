@@ -336,10 +336,18 @@
             });
 
             // Update statistics
-            //TO BE IMPLEMENTED !!!
+            stats.totalAnswered += questions.length;
+            stats.totalCorrect += correctAnswers;
+            stats.totalWrong += incorrectAnswers;
+
+            localStorage.setItem('quizStats', JSON.stringify(stats));
 
             // Update statistics on sidebar
-            //TO BE IMPLEMENTED !!!
+            
+            document.getElementById('totalAnswered').textContent = `Total Questions Answered: ${stats.totalAnswered}`;
+            document.getElementById('totalCorrect').textContent = `Total Correct Answers: ${stats.totalCorrect}`;
+            document.getElementById('totalWrong').textContent = `Total Incorrect Answers: ${stats.totalWrong}`;
+
 
             // Clear fields after 3 seconds
             setTimeout(() => {
@@ -351,7 +359,7 @@
         }
 
         // Toggle Statistics visibility
-        //TO BE IMPLEMENTED !!!
+        
     </script>
 
 </body>
