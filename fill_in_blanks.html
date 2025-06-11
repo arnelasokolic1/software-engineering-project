@@ -109,7 +109,6 @@
         }
 
         /* Statistics Section */
-        
         #statistics {
             display: none;
             background: linear-gradient(to left, #04286b, #bb1f5d, #e08e0a);
@@ -129,8 +128,6 @@
             font-size: 18px;
             margin-bottom: 10px;
         }
-
-       
 
         /* Media Queries for Responsiveness */
         @media (max-width: 768px) {
@@ -231,16 +228,15 @@
         </ul>
 
         <!-- Show Statistics Button -->
-       <button class="btn-finish" onclick="toggleStatistics()">Show Statistics</button>
+        <button class="btn-finish" onclick="toggleStatistics()">Show Statistics</button>
 
         <!-- Statistics Section -->
-         <div id="statistics">
+        <div id="statistics">
             <h4>Statistics for the Last 3 Days</h4>
             <p id="totalAnswered">Total Questions Answered: 0</p>
             <p id="totalCorrect">Total Correct Answers: 0</p>
             <p id="totalWrong">Total Incorrect Answers: 0</p>
         </div>
-    </div>
     </div>
 
     <!-- Quiz Form -->
@@ -343,11 +339,9 @@
             localStorage.setItem('quizStats', JSON.stringify(stats));
 
             // Update statistics on sidebar
-            
             document.getElementById('totalAnswered').textContent = `Total Questions Answered: ${stats.totalAnswered}`;
             document.getElementById('totalCorrect').textContent = `Total Correct Answers: ${stats.totalCorrect}`;
             document.getElementById('totalWrong').textContent = `Total Incorrect Answers: ${stats.totalWrong}`;
-
 
             // Clear fields after 3 seconds
             setTimeout(() => {
@@ -359,7 +353,10 @@
         }
 
         // Toggle Statistics visibility
-        
+        function toggleStatistics() {
+            let statsSection = document.getElementById('statistics');
+            statsSection.style.display = statsSection.style.display === 'none' ? 'block' : 'none';
+        }
     </script>
 
 </body>
