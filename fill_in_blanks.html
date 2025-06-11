@@ -253,42 +253,6 @@
     </div>
 
     <!-- JavaScript -->
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz App</title>
-    <style>
-        .correct { background-color: green; }
-        .incorrect { background-color: red; }
-        #statistics { display: none; }
-    </style>
-</head>
-<body>
-    <!-- Start Button for Statistics -->
-    <button id="toggleStatsButton" onclick="toggleStatistics()">Toggle Statistics</button>
-
-    <!-- Statistics Section -->
-    <div id="statistics">
-        <p id="totalAnswered">Total Questions Answered: 0</p>
-        <p id="totalCorrect">Total Correct Answers: 0</p>
-        <p id="totalWrong">Total Incorrect Answers: 0</p>
-    </div>
-
-    <!-- Level Button -->
-    <button onclick="loadLevel(1)">Start Level 1</button>
-
-    <!-- Question Container -->
-    <div id="questionContainer"></div>
-
-    <!-- Finish Button -->
-    <button id="finishButton" style="display: none;" onclick="submitQuiz()">Finish Quiz</button>
-
-    <div id="explanation" style="display: none;">
-        <p>Explanation text goes here.</p>
-    </div>
-
     <script>
         // Level questions and answers
         const questionsByLevel = {
@@ -394,9 +358,6 @@
             statsSection.style.display = statsSection.style.display === 'none' ? 'block' : 'none';
         }
     </script>
-</body>
-</html>
-
 
 </body>
 
