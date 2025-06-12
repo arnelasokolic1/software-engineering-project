@@ -5,27 +5,27 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import time
 
-# Drajver
+# Driver
 driver = webdriver.Chrome()
 
-# Link stranice
+# Link of the page 
 driver.get("https://software-engineering-project-silk.vercel.app/index.html")  
 
-# Stranica se učitava
+# Now the page is loading
 time.sleep(3)
 
-# provjeravamo da li je tačan text na stranici
+# we check if the text is correct on the page 
 try:
     
     element = WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.ID, "welcomeText")) 
     )
     
-    # ako je tačno 
+    # if it is correct 
     assert "Hello! Welcome to Blockchain Quiz" in element.text
     print("Test passed: The correct text is displayed on the page!")
 except Exception as e:
-    print(f"Test failed: The text was not found or did not match. Error: {e}") # ako nije tačno
+    print(f"Test failed: The text was not found or did not match. Error: {e}") # if it is not correct 
 
-# zatvaramo browser
+# closing browser 
 driver.quit()
