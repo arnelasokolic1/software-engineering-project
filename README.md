@@ -6,7 +6,7 @@ This Blockchain Quiz Decentralized Web Application is designed to provide an int
 The platform features multiple quiz levels, a "Fill in the Blanks" game, detailed lessons, and random blockchain facts. With its integration of smart contracts, MetaMask, and secure features, this application offers a secure and transparent way to learn and interact with blockchain concepts.
 
 **Website Link:**  
-
+https://software-engineering-project-silk.vercel.app/
 ---
 
 **Features**
@@ -81,7 +81,7 @@ The platform features multiple quiz levels, a "Fill in the Blanks" game, detaile
 **Release 2: June 2025**
 - Showing and Hiding the Statistics Section
 - Mascot Introduction
-- Additional lesson features and updates.
+
 
 ---
 
