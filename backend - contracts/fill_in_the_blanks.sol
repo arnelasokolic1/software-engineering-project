@@ -8,7 +8,7 @@ interface IERC20 {
 
 contract QuizScore {
 
-    // Token address (replace this with your token contract address)
+    // Token address 
     address public tokenAddress;
 
     // Define the ERC-20 token interface
@@ -48,7 +48,7 @@ contract QuizScore {
         userScores.push(UserScore(_user, _score));
 
         // Calculate the number of tokens to send (1 token per score point)
-        uint256 tokensToSend = _score; // You can adjust this calculation as needed
+        uint256 tokensToSend = _score; 
 
         // Transfer the tokens from the contract to the user
         require(token.transfer(_user, tokensToSend), "Token transfer failed");
